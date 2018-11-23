@@ -42,9 +42,9 @@ class ProjectsController extends Controller
 
     	$project = Project::create($validated);
 
-        Mail::to('weinam95@gmail.com')->send(
-            new ProjectCreated($project)
-        );
+        // Mail::to('weinam95@gmail.com')->send(
+        //     new ProjectCreated($project)
+        // );
 
     	return redirect('/projects');
     }
@@ -75,7 +75,7 @@ class ProjectsController extends Controller
     public function validateProject()
     {
         return request()->validate([
-            'title' => ['request', 'min:3'],
+            'title' => ['required', 'min:3'],
             'description' => ['required', 'min:3'],
         ]);
     }
