@@ -13,7 +13,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="/home" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>S</b>NY</span>
       <!-- logo for regular state and mobile devices -->
@@ -64,8 +64,7 @@
           <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+          <p>@yield('user_name')</p>
         </div>
       </div>
       <ul class="sidebar-menu" data-widget="tree">
@@ -93,7 +92,17 @@
         </li>
 
         <li class="header">LABELS</li>
-        <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Logout</span></a></li>
+        <li>
+          <a href="{{ route('logout') }}"
+             onclick="event.preventDefault();
+                           document.getElementById('logout-form').submit();">
+              <i class="fa fa-circle-o text-red"></i>
+              {{ __('Logout') }}
+          </a>
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+              @csrf
+          </form>
+        </li>
       </ul>
     </section>
     <!-- /.sidebar -->
