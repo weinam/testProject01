@@ -2,11 +2,11 @@
 
 @section('title', 'Mall | Groups')
 
-@section('content-header')
-	<h1>
-    	<small>Group Pgaes</small>
-  	</h1>
+@section('user_name')
+  {{Auth::user()->name}}
 @endsection
+
+@section('content_header', 'Groups Pages')
 
 @section('content')
 	<section class="content">
@@ -30,9 +30,7 @@
                 <tbody>
                   <tr>
                     <td>Trident</td>
-                    <td>Internet
-                      Explorer 4.0
-                    </td>
+                    <td>Internet Explorer 4.0</td>
                     <td>Win 95+</td>
                     <td> 4</td>
                     <td>X</td>

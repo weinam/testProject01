@@ -61,7 +61,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>@yield('user_name')</p>
@@ -69,35 +69,29 @@
       </div>
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
-        <li class="treeview">
-          <a href="#">
+        <li>
+          <a href="/home">
             <i class="fa fa-dashboard"></i> <span>Module</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
           </a>
-          <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i> Module v1</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Module v2</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Module v3</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Module v4</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Module v5</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Module v6</a></li>
-          </ul>
         </li>
         <li>
           <a href="/groups">
             <i class="fa fa-th"></i> <span>Groups</span>
           </a>
         </li>
-
+        <li class="header">MANAGEMENTS</li>
+        <li>
+          <a href="/projects">
+            <i class="fa fa-book"></i> <span>Projects</span>
+          </a>
+        </li>
         <li class="header">LABELS</li>
         <li>
           <a href="{{ route('logout') }}"
              onclick="event.preventDefault();
                            document.getElementById('logout-form').submit();">
               <i class="fa fa-circle-o text-red"></i>
-              {{ __('Logout') }}
+              <span>{{ __('Logout') }}</span>
           </a>
           <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
               @csrf
@@ -112,7 +106,7 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      @yield('content-header')
+      <h1><small>@yield('content_header')</small></h1>
     </section>
 
     @yield('content')

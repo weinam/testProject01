@@ -17,7 +17,7 @@ class ProjectsController extends Controller
 
     public function index()
     {
-        $projects = auth()->user()->projects;
+        $projects = auth()->user()->projects->where('is_deleted','=',false);
 
     	return view('projects.index', compact('projects'));
     }
@@ -34,19 +34,29 @@ class ProjectsController extends Controller
         return view('projects.show', compact('project'));
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        $validated = $this->validateProject();
+        switch($request->input('action')) {
+            case 'create':
+                $validated = $this->validateProject();
+                $validated['owner_id'] = auth()->id();
+                $project = Project::create($validated);
+                return redirect('/projects');
+            case 'back':
+                return redirect('/projects');
+        }
 
-        $validated['owner_id'] = auth()->id();
+     //    $validated = $this->validateProject();
 
-    	$project = Project::create($validated);
+     //    $validated['owner_id'] = auth()->id();
+
+    	// $project = Project::create($validated);
 
         // Mail::to('weinam95@gmail.com')->send(
         //     new ProjectCreated($project)
         // );
 
-    	return redirect('/projects');
+    	// return redirect('/projects');
     }
 
     public function edit(Project $project)
@@ -54,20 +64,30 @@ class ProjectsController extends Controller
         return view('projects.edit', compact('project'));
     }
 
-    public function update(Project $project)
+    public function update(Request $request, Project $project)
     {
-        $this->authorize('update', $project);
+        switch($request->input('action')) {
+            case 'edit':
+                $this->authorize('update', $project);
+                $project->update($this->validateProject());
+                return redirect('/projects');
+            case 'back':
+                return redirect('/projects');
+        }
+        
 
-        $project->update($this->validateProject());
+        
 
-        return redirect('/projects');
+        
     }
 
-    public function destroy(Project $project)
+    public function delete(Project $project)
     {
         $this->authorize('update', $project);
 
-        $project->delete();
+        $project['is_deleted'] = true;
+        $project->save();
+        // $project->delete();
 
         return redirect('/projects');
     }
