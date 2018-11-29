@@ -29,6 +29,10 @@ Route::get('/projects/{project}/edit', 'ProjectsController@edit')->name('project
 Route::patch('/projects/{project}/update', 'ProjectsController@update')->name('projects.update');
 Route::post('/projects/{project}/delete', 'ProjectsController@delete')->name('projects.delete');
 
+//SetRole Register
+Route::get('/rolesset/create', 'RolesSetController@create');
+Route::post('/rolesset/store', 'RolesSetController@store');
+
 Route::post('/projects/{project}/tasks', 'ProjectTasksController@store');
 Route::patch('/tasks/{task}', 'ProjectTasksController@update');
 Route::get('/groups', 'GroupsController@index');

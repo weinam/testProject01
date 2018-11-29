@@ -45,18 +45,9 @@ class ProjectsController extends Controller
             case 'back':
                 return redirect('/projects');
         }
-
-     //    $validated = $this->validateProject();
-
-     //    $validated['owner_id'] = auth()->id();
-
-    	// $project = Project::create($validated);
-
         // Mail::to('weinam95@gmail.com')->send(
         //     new ProjectCreated($project)
         // );
-
-    	// return redirect('/projects');
     }
 
     public function edit(Project $project)
@@ -74,11 +65,6 @@ class ProjectsController extends Controller
             case 'back':
                 return redirect('/projects');
         }
-        
-
-        
-
-        
     }
 
     public function delete(Project $project)
@@ -87,7 +73,6 @@ class ProjectsController extends Controller
 
         $project['is_deleted'] = true;
         $project->save();
-        // $project->delete();
 
         return redirect('/projects');
     }
