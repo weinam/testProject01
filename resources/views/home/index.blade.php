@@ -6,20 +6,26 @@
 	{{Auth::user()->name}}
 @endsection
 
+@section('profile_link')
+	{{ $user->id }}
+@endsection
+
 @section('content_header', 'Home Pages')
 
 @section('content')
 	<section class="content">
 		<div class="row">
-	        <div class="col-lg-2 col-xs-4">
-	          <!-- small box -->
+		
+		@for ($i=0; $i<$max; $i++)
+			<div class="col-lg-2 col-xs-4">
 	          <div class="small-box bg-aqua">
 	            <div class="inner">
-	              <p>Module 1</p>
+	              <p>API {{ $i+1 }}</p>
 	            </div>
 	            <a href="#" class="small-box-footer">GO <i class="fa fa-arrow-circle-right"></i></a>
 	          </div>
 	        </div>
+		@endfor
 	    </div>
 	</section>
 	

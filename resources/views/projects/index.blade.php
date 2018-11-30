@@ -46,13 +46,13 @@
                 				</div>
                 				<div class="col-xs-4">
                 					<a 
-                					onclick="event.preventDefault();
-                					document.getElementById('delete_form').submit();">
-              							<i class="fa fa-trash"></i>
-          							</a>
-          							<form id="delete_form" action="/projects/{{ $project->id }}/delete" method="POST" style="display: none;">
-          								@csrf
-							        </form>
+                  					onclick="event.preventDefault();
+                  					document.getElementById('delete_form').submit();">
+                							<i class="fa fa-trash"></i>
+            							</a>
+            							<form id="delete_form" action="/projects/{{ $project->id }}/delete" method="POST" style="display: none;">
+            								@csrf
+    							        </form>
                 				</div>
                 			</td>
                 		</tr>

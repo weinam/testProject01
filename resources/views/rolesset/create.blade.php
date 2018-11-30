@@ -41,8 +41,18 @@
           	</div>
           	<form method="POST" action="/rolesset/store">
           		@csrf
-          		<input type="text" name="user">
-          		<input type="text" name="role">
+              <select class="form-control select2" name="user" style="width: 100%;">
+                @foreach ($users as $user)
+                  <option>{{ $user->name }}</option>
+                @endforeach
+              </select>
+              <select class="form-control select2" name="role" style="width: 100%;">
+                @foreach ($roles as $role)
+                  <option>{{ $role->role_name }}</option>
+                @endforeach
+              </select>
+          		{{-- <input type="text" name="user"> --}}
+          		{{-- <input type="text" name="role"> --}}
           		<button type="summit">Summit</button>
           	</form>
           </div>

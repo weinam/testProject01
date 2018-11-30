@@ -18,6 +18,8 @@ class RolesSetController extends Controller
     {
     	DB::table('users')->where('name', '=', $request->user)
     					->update(['role' => $request->role]);
+
+        return redirect('/roles');
     }
 }
 

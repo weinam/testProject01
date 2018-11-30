@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Roles extends Model
 {
-    public function user()
-    {
-    	return $this->haveMany(User::class);
-    }
+    protected $table = 'roles';
+    protected $fillable = [
+		'role_name',
+    ];
 }

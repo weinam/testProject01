@@ -24,6 +24,12 @@ class HomeController extends Controller
     public function index()
     {
         $user = auth()->user();
-        return view('home.index', compact('user'));
+        if($user->role == 'admin')
+            $max = 6;
+        else if($user->role == 'security')
+            $max = 4;
+        else
+            $max = 1;
+        return view('home.index', compact('max', 'user'));
     }
 }

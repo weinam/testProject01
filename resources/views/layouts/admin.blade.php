@@ -61,7 +61,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+          <a href="/profile/@yield('profile_link')/show"><img src="{{ asset('dist/img/blank-user.png') }}" class="img-circle" alt="User Image"></a>
         </div>
         <div class="pull-left info">
           <p>@yield('user_name')</p>
@@ -77,6 +77,11 @@
         <li>
           <a href="/groups">
             <i class="fa fa-th"></i> <span>Groups</span>
+          </a>
+        </li>
+        <li>
+          <a href="/roles">
+            <i class="fa fa-book"></i> <span>Role</span>
           </a>
         </li>
         <li class="header">MANAGEMENTS</li>
