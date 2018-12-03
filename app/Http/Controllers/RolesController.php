@@ -39,13 +39,16 @@ class RolesController extends Controller
 
     public function edit(Roles $role)
     {
-        return view('roles.edit', compact('role'));
+        $functions = json_decode($role->function);
+        return view('roles.edit', compact('role', 'functions'));
     }
 
     public function update(Request $request, Roles $role)
     {
         switch($request->input('action')) {
             case 'edit':
+                $function = json_encode($request->input('function'));
+                $role['function'] = $function;
                 $role->update($this->validated());
                 return redirect('/roles');
             case 'back':
