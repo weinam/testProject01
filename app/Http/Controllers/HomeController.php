@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -24,12 +25,8 @@ class HomeController extends Controller
     public function index()
     {
         $user = auth()->user();
-        if($user->role == 'admin')
-            $max = 6;
-        else if($user->role == 'security')
-            $max = 4;
-        else
-            $max = 1;
-        return view('home.index', compact('max', 'user'));
+        $function = json_decode(DB::table('roles')->where('role_name', '=', $user->role)
+                                                ->value('function'));
+        return view('home.index', compact('user', 'function'));
     }
 }

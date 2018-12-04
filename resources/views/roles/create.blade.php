@@ -22,12 +22,9 @@
 				  	<input type="text" name="role_name" placeholder="Roles" value={{ old('role_name') }}>
                 </div>
                 <div class="container">
-					<input type="checkbox" name="function[]" value="Function 1">Function 1<br>
-	                <input type="checkbox" name="function[]" value="Function 2">Function 2<br>
-	                <input type="checkbox" name="function[]" value="Function 3">Function 3<br>
-	                <input type="checkbox" name="function[]" value="Function 4">Function 4<br>
-	                <input type="checkbox" name="function[]" value="Function 5">Function 5<br>
-					<input type="checkbox" name="function[]" value="Function 6">Function 6<br>
+                	@for ($i=0; $i<6; $i++)
+	                	<input type="checkbox" name="function[]" value="{{$i+1}}">Function {{$i+1}}<br>
+                	@endfor
                 </div>
               </div>
               <div class="box-footer">

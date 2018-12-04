@@ -40,7 +40,18 @@ class RolesController extends Controller
 
     public function edit(Roles $role)
     {
-        return view('roles.edit', compact('role'));
+        $role->function = json_decode($role->function);
+        for ($i=0; $i<6; $i++) {
+            for ($j=0; $j<sizeof($role->function); $j++) {
+                if ($i+1 == $role->function[$j]) {
+                    $isChecked[$i] = true;
+                    break;
+                }
+                else
+                    $isChecked[$i] = false;
+            }
+        }
+        return view('roles.edit', compact('role','isChecked'));
     }
 
     public function update(Request $request, Roles $role)

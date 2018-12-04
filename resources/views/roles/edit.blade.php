@@ -23,9 +23,9 @@
               		<input type="text" name="role_name" placeholder="Title" value="{{ $role->role_name }}">
               	</div>
               	<div class="container">
-              		@for ($i=0; $i<2; $i++)
-              			<input type="checkbox" name="function[]" value="funtion_1"><br>
-              		@endfor
+                  @for ($i=0; $i<sizeof($isChecked); $i++)
+                    <input type="checkbox" name="function[]" value="{{$i+1}}" {{$isChecked[$i] ? "checked":""}}> Function {{$i+1}}<br>
+                  @endfor
                 </div>
               </div>
               <div class="box-footer">

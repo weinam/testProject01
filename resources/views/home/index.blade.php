@@ -16,16 +16,18 @@
 	<section class="content">
 		<div class="row">
 		
-		@for ($i=0; $i<$max; $i++)
-			<div class="col-lg-2 col-xs-4">
-	          <div class="small-box bg-aqua">
-	            <div class="inner">
-	              <p>API {{ $i+1 }}</p>
-	            </div>
-	            <a href="#" class="small-box-footer">GO <i class="fa fa-arrow-circle-right"></i></a>
-	          </div>
-	        </div>
-		@endfor
+		@if ($function != null)
+			@for ($i=0; $i<sizeof($function); $i++)
+				<div class="col-lg-2 col-xs-4">
+		          <div class="small-box bg-aqua">
+		            <div class="inner">
+		              <p>API {{ $function[$i] }}</p>
+		            </div>
+		            <a href="#" class="small-box-footer">GO <i class="fa fa-arrow-circle-right"></i></a>
+		          </div>
+		        </div>
+			@endfor
+		@endif
 	    </div>
 	</section>
 	
