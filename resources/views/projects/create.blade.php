@@ -6,6 +6,14 @@
 	{{Auth::user()->name}}
 @endsection
 
+@section('profile_link')
+	{{ Auth::user()->id }}
+@endsection
+
+@section('sidebar')
+	@include('include.sidebar')
+@endsection
+
 @section('content_header', 'Project Create Pages')
 
 @section('content')

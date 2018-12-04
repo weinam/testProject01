@@ -8,6 +8,6 @@ class GroupsController extends Controller
 {
     public function index()
     {
-    	return view('groups.index');
+    	return view('groups.index', compact('user'));
     }
 }

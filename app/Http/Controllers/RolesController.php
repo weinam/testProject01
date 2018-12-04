@@ -12,7 +12,7 @@ class RolesController extends Controller
     {
     	$roles = DB::table('roles')->where('is_deleted','=',false)
                                     ->get();
-    	return view('roles.index', compact('roles'));
+    	return view('roles.index', compact('roles', 'user'));
     }
 
     public function create()

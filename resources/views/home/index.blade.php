@@ -7,7 +7,11 @@
 @endsection
 
 @section('profile_link')
-	{{ $user->id }}
+	{{ Auth::user()->id }}
+@endsection
+
+@section('sidebar')
+	@include('include.sidebar')
 @endsection
 
 @section('content_header', 'Home Pages')
