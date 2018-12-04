@@ -25,6 +25,7 @@ class RolesController extends Controller
     	switch($request->input('action')) {
             case 'create':
             	$validated = $this->validated();
+                $validated['function'] = json_encode($request->input('function'));
             	Roles::create($validated);
                 return redirect('/roles');
             case 'back':
@@ -39,8 +40,7 @@ class RolesController extends Controller
 
     public function edit(Roles $role)
     {
-        $functions = json_decode($role->function);
-        return view('roles.edit', compact('role', 'functions'));
+        return view('roles.edit', compact('role'));
     }
 
     public function update(Request $request, Roles $role)

@@ -17,12 +17,17 @@
 			<form method="POST" action="/roles/store" class="form-horizontal">
 			  @csrf
               <div class="box-body">
-                <div class="form-group">
-                  <label for="role_name" class="col-sm-2 control-label">Role Name</label>
-
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" name="role_name" placeholder="Roles" value={{ old('role_name') }}>
-                  </div>
+                <div class="container">
+                  	<label for="role_name">Role Name</label>
+				  	<input type="text" name="role_name" placeholder="Roles" value={{ old('role_name') }}>
+                </div>
+                <div class="container">
+					<input type="checkbox" name="function[]" value="Function 1">Function 1<br>
+	                <input type="checkbox" name="function[]" value="Function 2">Function 2<br>
+	                <input type="checkbox" name="function[]" value="Function 3">Function 3<br>
+	                <input type="checkbox" name="function[]" value="Function 4">Function 4<br>
+	                <input type="checkbox" name="function[]" value="Function 5">Function 5<br>
+					<input type="checkbox" name="function[]" value="Function 6">Function 6<br>
                 </div>
               </div>
               <div class="box-footer">
