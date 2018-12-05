@@ -7,7 +7,7 @@
 @endsection
 
 @section('profile_link')
-  {{ Auth::user()->id }}
+  <a href="/profile/{{ Auth::user()->id }}/show"><img src="{{ asset('dist/img/blank-user.png') }}" class="img-circle" alt="User Image"></a>
 @endsection
 
 @section('sidebar')
@@ -27,7 +27,6 @@
             <div class="box-header col-xs-4">
             	<h6 class="text-right">
                 <span><a href="/roles/create">Create new role</a></span>
-                <span style="margin-left: 20px"><a href="/rolesset/create">Register Role</a></span>
               </h6>
             </div>
             <div class="box-body" >

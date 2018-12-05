@@ -7,7 +7,7 @@
 @endsection
 
 @section('profile_link')
-  {{ Auth::user()->id }}
+  <a href="/profile/{{ Auth::user()->id }}/show"><img src="{{ asset('dist/img/blank-user.png') }}" class="img-circle" alt="User Image"></a>
 @endsection
 
 @section('sidebar')

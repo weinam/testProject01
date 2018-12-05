@@ -4,18 +4,18 @@
     <i class="fa fa-dashboard"></i> <span>Module</span>
   </a>
 </li>
-<li>
-  <a href="/groups">
-    <i class="fa fa-th"></i> <span>Groups</span>
-  </a>
-</li>
-<li>
-  <a href="/roles">
-    <i class="fa fa-book"></i> <span>Role</span>
-  </a>
-</li>
 @if (Auth::user()->role == 'admin')
   <li class="header">MANAGEMENTS</li>
+  <li>
+    <a href="/users">
+      <i class="fa fa-book"></i> <span>Users</span>
+    </a>
+  </li>
+  <li>
+    <a href="/roles">
+      <i class="fa fa-book"></i> <span>Role</span>
+    </a>
+  </li>
   <li>
     <a href="/projects">
       <i class="fa fa-book"></i> <span>Projects</span>

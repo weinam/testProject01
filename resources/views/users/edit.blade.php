@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Mall | Roles Edit')
+@section('title', 'Mall | Users Edit')
 
 @section('user_name')
 	{{Auth::user()->name}}
@@ -14,36 +14,37 @@
 	@include('include.sidebar')
 @endsection
 
-@section('content_header', 'Roles Edit Page')
+@section('content_header', 'Users Edit Page')
 
 @section('content')
 	<section class="content">
 		<div class="box">
 			<div class="box-header with-border">
-				<h3>Edit Roles</h3>
+				<h3>Edit Users</h3>
 			</div>
-			<form method="POST" action="/roles/{{ $role->id }}/update" class="form-horizontal">
+			<form method="POST" action="/users/{{$user->id}}/update" class="form-horizontal">
 			  @method('PATCH')
 			  @csrf
               <div class="box-body">
               	<div class="container">
-              		<label for="role_name">Role Name</label>
-              		<input type="text" name="role_name" placeholder="Title" value="{{ $role->role_name }}">
+              		<label for="name">User Name</label>
+              		<input type="text" name="name" placeholder="Title" value="{{ $user->name }}">
               	</div>
               	<div class="container">
-                  @for ($i=0; $i<sizeof($isChecked); $i++)
-                    <input type="checkbox" name="function[]" value="{{$i+1}}" {{$isChecked[$i] ? "checked":""}}> Function {{$i+1}}<br>
-                  @endfor
+                 	<label for="role">User Role</label>
+              		<select name="role" style="margin-left: 9px;">
+		            	@foreach ($roles as $role)
+		            		<option {{$role->role_name == $user->role ? "selected":""}}> {{ $role->role_name }}</option>
+		            	@endforeach
+		            </select>
                 </div>
               </div>
               <div class="box-footer">
-					{{-- <a href="{{ URL::previous() }}"><button class="btn btn-default">Back</button></a> --}}
 					<button type="summit" name="action" value="back" class="btn btn-default">Back</button>
 					<button type="summit" name="action" value="edit" class="btn btn-primary" style="margin-left:5px">Edit</button>
 			  </div>
 			  @include('errors')
             </form>
-			
 		</div>
 	</section>
 @endsection

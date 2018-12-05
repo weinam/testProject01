@@ -28,9 +28,11 @@ Route::get('/projects/{project}/edit', 'ProjectsController@edit')->name('project
 Route::patch('/projects/{project}/update', 'ProjectsController@update')->name('projects.update');
 Route::post('/projects/{project}/delete', 'ProjectsController@delete')->name('projects.delete');
 
-//Role - set
-Route::get('/rolesset/create', 'RolesSetController@create')->name('rolesset.create');
-Route::post('/rolesset/store', 'RolesSetController@store')->name('rolesset.store');
+//User
+Route::get('/users', 'UsersController@index')->name('users.index');
+Route::get('/users/{user}/show', 'UsersController@show')->name('users.show');
+Route::get('/users/{user}/edit', 'UsersController@edit')->name('users.edit');
+Route::patch('/users/{user}/update', 'UsersController@update')->name('users.update');
 
 //Role
 Route::get('/roles', 'RolesController@index')->name('roles.index');
