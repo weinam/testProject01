@@ -18,28 +18,28 @@
 
 @section('content')
 	<section class="content">
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="box">
-          	<div class="box-header with-border">
-          		<h3>Detail</h3>
-          	</div>
-          	<div class="box-body">
-          		<span>
-          			<p><b>Role Name : </b>{{ $role->role_name }}</p>
-          		</span>
-          		<span>
-          			<p><b>Roles Created At : </b>{{ $role->created_at }}</p>
-          		</span>
-          		<span>
-          			<p><b>Roles Updated At : </b>{{ $role->updated_at }}</p>
-          		</span>
-          	</div>
-          	<div class="box-footer">
-          		<a href="{{ URL::to('/roles') }}"><button class="btn btn-default">Back</button></a>
-          	</div>
-          </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="box">
+        	<div class="box-header with-border">
+        		<h3>Detail</h3>
+        	</div>
+        	<div class="box-body">
+        		<span>
+        			<p><b>Role Name : </b>{{ $role->role_name }}</p>
+        		</span>
+        		<span>
+        			<p><b>Roles Created At : </b>{{ $role->created_at }}</p>
+        		</span>
+        		<span>
+        			<p><b>Roles Updated At : </b>{{ $role->updated_at }}</p>
+        		</span>
+        	</div>
+        	<div class="box-footer">
+        		<a href="{{ URL::to('/roles') }}"><button class="btn btn-default">Back</button></a>
+        	</div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 @endsection

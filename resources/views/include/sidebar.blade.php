@@ -13,7 +13,12 @@
   </li>
   <li>
     <a href="/roles">
-      <i class="fa fa-book"></i> <span>Role</span>
+      <i class="fa fa-book"></i> <span>Roles</span>
+    </a>
+  </li>
+  <li>
+    <a href="/functions">
+      <i class="fa fa-book"></i> <span>Functions</span>
     </a>
   </li>
   <li>

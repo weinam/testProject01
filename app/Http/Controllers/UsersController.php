@@ -21,7 +21,8 @@ class UsersController extends Controller
 
     public function edit(User $user)
     {
-    	$roles = DB::table('roles')->get();
+    	$roles = DB::table('roles')->where('is_deleted', '=', false)
+                                    ->get();
     	return view('users.edit', compact('user', 'roles'));
     }
 

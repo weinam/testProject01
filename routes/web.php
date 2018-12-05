@@ -43,6 +43,15 @@ Route::get('/roles/{role}/edit', 'RolesController@edit')->name('roles.edit');
 Route::patch('/roles/{role}/update', 'RolesController@update')->name('roles.update');
 Route::patch('/roles/{role}/delete', 'RolesController@delete')->name('roles.delete');
 
+//Functions
+Route::get('/functions', 'FunctionsController@index')->name('functions.index');
+Route::get('/functions/create', 'FunctionsController@create')->name('functions.create');
+Route::post('/functions/store', 'FunctionsController@store')->name('functions.store');
+Route::get('/functions/{function}/show', 'FunctionsController@show')->name('functions.show');
+Route::get('/functions/{function}/edit', 'FunctionsController@edit')->name('functions.edit');
+Route::patch('/functions/{function}/update', 'FunctionsController@update')->name('functions.update');
+Route::patch('/functions/{function}/delete', 'FunctionsController@delete')->name('functions.delete');
+
 //Profile
 Route::get('/profile/{profile}/show', 'ProfileController@show')->name('profile.show');
 

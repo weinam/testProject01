@@ -30,9 +30,12 @@
 				  	<input type="text" name="role_name" placeholder="Roles" value={{ old('role_name') }}>
                 </div>
                 <div class="container">
-                	@for ($i=0; $i<6; $i++)
-	                	<input type="checkbox" name="function[]" value="{{$i+1}}">Function {{$i+1}}<br>
-                	@endfor
+                	@foreach ($functions as $function)
+                		<input type="checkbox" name="function[]" value="{{$function->id}}"> {{ $function->name }}<br>
+                	@endforeach
+                	{{-- @for ($i=0; $i<sizeof($functions); $i++)
+	                	<input type="checkbox" name="function[]" value="{{$i+1}}"> {{ $functions[$i]->name }}<br>
+                	@endfor --}}
                 </div>
               </div>
               <div class="box-footer">
