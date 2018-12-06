@@ -62,7 +62,6 @@
       <div class="user-panel">
         <div class="pull-left image">
           @yield('profile_link')
-          {{-- <a href="/profile/@yield('profile_link')/show"><img src="{{ asset('dist/img/blank-user.png') }}" class="img-circle" alt="User Image"></a> --}}
         </div>
         <div class="pull-left info">
           <p>@yield('user_name')</p>

@@ -17,7 +17,8 @@ class RolesController extends Controller
 
     public function create()
     {
-        $functions = DB::table('functions')->get();
+        $functions = DB::table('functions')->where('is_deleted', '=', false)
+                                            ->get();
     	return view('roles.create', compact('functions'));
     }
 
@@ -43,22 +44,21 @@ class RolesController extends Controller
     {
         $isChecked = array();
         $role->function = json_decode($role->function);
-        $functions = DB::table('functions')->get();
-        
+        $functions = DB::table('functions')->where('is_deleted', '=', false)
+                                            ->get();
         if ($role->function != null) {
             for ($i=0; $i<sizeof($functions); $i++) {
                 for ($j=0; $j<sizeof($role->function); $j++) {
-                    if ($i+1 == $role->function[$j]) {
+                    if ($functions[$i]->id == $role->function[$j]) {
                         $isChecked[$i] = true;
                         break;
                     }
                     else
                         $isChecked[$i] = false;
                 }
-                $functionID[$i] = $functions[$i]->id;
             }
         }
-        return view('roles.edit', compact('role', 'isChecked'));
+        return view('roles.edit', compact('role', 'isChecked', 'functions'));
     }
 
     public function update(Request $request, Roles $role)

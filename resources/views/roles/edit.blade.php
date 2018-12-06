@@ -32,7 +32,7 @@
               	</div>
               	<div class="container">
                   @for ($i=0; $i<sizeof($isChecked); $i++)
-                    <input type="checkbox" name="function[]" value="{{$i+1}}" {{$isChecked[$i] ? "checked":""}}> Function {{$i+1}}<br>
+                    <input type="checkbox" name="function[]" value="{{$functions[$i]->id}}" {{$isChecked[$i] ? "checked":""}}> {{ $functions[$i]->name }}<br>
                   @endfor
                 </div>
               </div>
@@ -43,7 +43,6 @@
 			  </div>
 			  @include('errors')
             </form>
-			
 		</div>
 	</section>
 @endsection

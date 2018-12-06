@@ -25,8 +25,12 @@ class HomeController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $function = json_decode(DB::table('roles')->where('role_name', '=', $user->role)
+        $role = json_decode(DB::table('roles')->where('role_name', '=', $user->role)
                                                 ->value('function'));
-        return view('home.index', compact('user', 'function'));
+        for ($i=0; $i<sizeof($role); $i++) {
+            $functions[] = DB::table('functions')->where('id', '=', $role[$i])
+                                                    ->value('name');
+        }
+        return view('home.index', compact('functions'));
     }
 }

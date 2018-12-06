@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Functions;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 
 class FunctionsController extends Controller
 {
     public function index()
     {
-    	$functions = DB::table('functions')->get();
+    	$functions = DB::table('functions')->where('is_deleted', '=', false)
+    										->get();
     	return view('functions.index', compact('functions'));
     }
 
@@ -19,9 +21,15 @@ class FunctionsController extends Controller
     	return view('functions.create');
     }
 
-    public function store()
+    public function store(Request $request)
     {
-    	return redirect('/functions');
+    	switch($request->input('action')) {
+    		case 'create':
+    			Functions::create($request->all());
+    			return redirect('/functions');
+    		case 'back':
+    			return redirect('/functions');
+    	}
     }
 
     public function show(Functions $function)
@@ -29,18 +37,27 @@ class FunctionsController extends Controller
     	return view('functions.show', compact('function'));
     }
 
-    public function edit()
+    public function edit(Functions $function)
     {
-    	return view('functions.edit');
+    	return view('functions.edit', compact('function'));
     }
 
-    public function update()
+    public function update(Request $request, Functions $function)
     {
-    	return redirect('/functions');
+    	switch ($request->input('action')) {
+    		case 'edit':
+    			$function->update($request->all());
+    			return redirect('/functions');
+    		case 'back':
+    			return redirect('/functions');
+    	}
     }
 
-    public function delete()
+    public function delete(Functions $function)
     {
+    	$function->is_deleted = true;
+    	$function->update();
+
     	return redirect('/functions');
     }
 }
