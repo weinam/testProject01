@@ -15,6 +15,7 @@ class CreateFunctionsTable extends Migration
     {
         Schema::create('functions', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedinteger('project_id');
             $table->string('name');
             $table->boolean('is_deleted')->default(false);
             $table->timestamps();
