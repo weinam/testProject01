@@ -32,9 +32,5 @@
 				@endforeach
 			@endif
 	    </div>
-	    {{-- <div>
-	    	<iframe height="300px" width="90%" name="iframe_a"></iframe>
-	    	<p><a href="https://www.google.com" target="iframe_a">test</a></p>
-	    </div> --}}
 	</section>
 @endsection

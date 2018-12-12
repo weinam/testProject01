@@ -11,5 +11,11 @@ class Roles extends Model
     protected $fillable = [
 		'role_name',
 		'function',
+		'project_id',
     ];
+
+    public function project()
+    {
+    	return $this->hasOne(Project::class);
+    }
 }

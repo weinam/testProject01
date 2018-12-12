@@ -32,9 +32,9 @@
               	</div>
               	<div class="container">
                  	<label for="role">User Role</label>
-              		<select name="role" style="margin-left: 9px;">
+              		<select name="role_id" style="margin-left: 9px;">
 		            	@foreach ($roles as $role)
-		            		<option {{$role->role_name == $user->role ? "selected":""}}> {{ $role->role_name }}</option>
+		            		<option value={{$role->id}} {{$role->id == $user->role_id ? "selected":""}}> {{ $role->role_name }}</option>
 		            	@endforeach
 		            </select>
                 </div>

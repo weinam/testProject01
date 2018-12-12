@@ -29,6 +29,14 @@
                   	<label for="name">Function Name</label>
 				  	<input type="text" name="name" placeholder="Function Name" value={{ old('name') }}>
                 </div>
+                <div class="container">
+                  	<label for="name">Project</label>
+				  	<select name="project_id">
+				  		@foreach ($projects as $project)
+				  			<option value="{{$project->id}}"> {{ $project->title }}</option>
+				  		@endforeach
+				  	</select>
+                </div>
               </div>
               <div class="box-footer">
 					<button type="summit" name="action" value="back" class="btn btn-default">Back</button>

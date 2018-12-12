@@ -18,7 +18,8 @@ class FunctionsController extends Controller
 
     public function create()
     {
-    	return view('functions.create');
+        $projects = DB::table('projects')->get();
+    	return view('functions.create', compact('projects'));
     }
 
     public function store(Request $request)

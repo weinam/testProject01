@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Mall | Roles Saturday')
+@section('title', 'Mall | Roles Set')
 
 @section('user_name')
 	{{Auth::user()->name}}
@@ -39,7 +39,7 @@
                   @foreach ($users as $user)
                     <tr>
                       <td>{{ $user->name }}</td>
-                      <td>{{ $user->role }}</td>
+                      <td>{{ $user->role_id }}</td>
                       <td>{{ $user->created_at }}</td>
                       <td>{{ $user->updated_at }}</td>
                       <td>

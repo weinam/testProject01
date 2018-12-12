@@ -25,17 +25,18 @@ class HomeController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $role = json_decode(DB::table('roles')->where('role_name', '=', $user->role)
-                                                ->value('function'));
-
+        $role = json_decode(DB::table('roles')->where('id', '=', $user->role_id
+)                                                ->value('function'));
+        
         if ($role != null) {
             for ($i=0; $i<sizeof($role); $i++) {
-                $functions[] = DB::table('functions')->where('id', '=', $role[$i])
+                $functions[] = DB::table('functions')->where('id', '=', $role[$i]) 
                                                         ->value('name');
             }
         }
         else
             $functions = array();
+
         return view('home.index', compact('functions'));
     }
 }

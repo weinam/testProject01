@@ -15,11 +15,16 @@ class RolesController extends Controller
     	return view('roles.index', compact('roles', 'user'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
         $functions = DB::table('functions')->where('is_deleted', '=', false)
                                             ->get();
-    	return view('roles.create', compact('functions'));
+        $projects = DB::table('projects')->get();
+        if (session()->has('project_id')) 
+            $session_project_id = session('project_id');
+        else 
+            $session_project_id = 1;
+    	return view('roles.create', compact('functions', 'projects', 'session_project_id'));
     }
 
     public function store(Request $request)
@@ -28,10 +33,14 @@ class RolesController extends Controller
             case 'create':
             	$validated = $this->validated();
                 $validated['function'] = json_encode($request->input('function'));
+                $validated['project_id'] = $request->input('project_id');
             	Roles::create($validated);
                 return redirect('/roles');
             case 'back':
                 return redirect('/roles');
+        }
+        if ($request->input('project_id')) {
+            return redirect('/roles/create')->with(['project_id'=>$request->input('project_id')]);
         }
     }
 
@@ -45,6 +54,7 @@ class RolesController extends Controller
         $isChecked = array();
         $role->function = json_decode($role->function);
         $functions = DB::table('functions')->where('is_deleted', '=', false)
+                                            ->where('project_id', '=', $role->project_id)
                                             ->get();
         if ($role->function != null) {
             for ($i=0; $i<sizeof($functions); $i++) {

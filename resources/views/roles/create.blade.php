@@ -30,16 +30,22 @@
 				  	<input type="text" name="role_name" placeholder="Roles" value={{ old('role_name') }}>
                 </div>
                 <div class="container">
+                  	<label for="project_id">Project</label>
+                  	<select name="project_id" onchange="this.form.submit()">
+				  		@foreach ($projects as $project)
+					  		<option value="{{$project->id}}" {{$project->id == $session_project_id ? "selected":""}}> {{$project->title}}</option>
+					  	@endforeach
+					</select>
+                </div>
+                <div class="container">
                 	@foreach ($functions as $function)
-                		<input type="checkbox" name="function[]" value="{{$function->id}}"> {{ $function->name }}<br>
+                		@if ($function->project_id == $session_project_id)
+                			<input type="checkbox" name="function[]" value="{{$function->id}}"> {{ $function->name }}<br>
+                		@endif
                 	@endforeach
-                	{{-- @for ($i=0; $i<sizeof($functions); $i++)
-	                	<input type="checkbox" name="function[]" value="{{$i+1}}"> {{ $functions[$i]->name }}<br>
-                	@endfor --}}
                 </div>
               </div>
               <div class="box-footer">
-					{{-- <a href="{{ URL::previous() }}"><button class="btn btn-default">Back</button></a> --}}
 					<button type="summit" name="action" value="back" class="btn btn-default">Back</button>
 					<button type="summit" name="action" value="create" class="btn btn-primary" style="margin-left:5px">Create</button>
 			  </div>
