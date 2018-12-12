@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Mall | Roles Sat')
+@section('title', 'Mall | Roles Saturday')
 
 @section('user_name')
 	{{Auth::user()->name}}
