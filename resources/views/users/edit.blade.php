@@ -31,12 +31,20 @@
               		<input type="text" name="name" placeholder="Title" value="{{ $user->name }}">
               	</div>
               	<div class="container">
-                 	<label for="role">User Role</label>
-              		<select name="role_id" style="margin-left: 9px;">
-		            	@foreach ($roles as $role)
-		            		<option value={{$role->id}} {{$role->id == $user->role_id ? "selected":""}}> {{ $role->role_name }}</option>
-		            	@endforeach
-		            </select>
+              		<div class="checkbox">
+              			<label>
+		                	<input type="checkbox" name="isAdmin" value="1" {{$user->isAdmin ? "checked":""}}> <b>Admin</b>
+		                </label>
+              		</div>
+              	</div>
+              	<div class="container">
+              		@for ($i=0; $i<sizeof($roles); $i++)
+              			@if (sizeof($isChecked) != 0)
+              				<input type="checkbox" name="role_id[]" value={{$roles[$i]->id}} {{$isChecked[$i] ? "checked":""}}> {{ $roles[$i]->role_name }}<br>
+              			@else
+              				<input type="checkbox" name="role_id[]" value={{$roles[$i]->id}}> {{ $roles[$i]->role_name }}<br>
+              			@endif
+                	@endfor
                 </div>
               </div>
               <div class="box-footer">

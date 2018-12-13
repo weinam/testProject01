@@ -4,7 +4,7 @@
     <i class="fa fa-dashboard"></i> <span>Module</span>
   </a>
 </li>
-@if (Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+@if (Auth::user()->isAdmin == true)
   <li class="header">MANAGEMENTS</li>
   <li>
     <a href="/users">

@@ -23,7 +23,23 @@ class UsersController extends Controller
     {
     	$roles = DB::table('roles')->where('is_deleted', '=', false)
                                     ->get();
-    	return view('users.edit', compact('user', 'roles'));
+   
+        $user_roles = json_decode($user->role_id);
+        $isChecked = array();
+        if ($user_roles != null) {
+            for ($i=0; $i<sizeof($roles); $i++) {
+                for ($j=0; $j<sizeof($user_roles); $j++) {
+                    if ($roles[$i]->id == $user_roles[$j]) {
+                        $isChecked[$i] = true;
+                        break;
+                    }
+                    else
+                        $isChecked[$i] = false;
+                }
+            }
+        }
+    
+    	return view('users.edit', compact('user', 'roles', 'isChecked'));
     }
 
     public function update(Request $request, User $user)
@@ -33,6 +49,11 @@ class UsersController extends Controller
             	foreach ($request->except('_token','_method','action') as $key => $value) {
             		$user[$key] = $value;
             	}
+                $user['role_id'] = json_encode($user['role_id']);
+                if ($request->has('isAdmin')) 
+                    $user['isAdmin'] = true;
+                else
+                    $user['isAdmin'] = false;
             	$user->update();
                 return redirect('/users');
             case 'back':

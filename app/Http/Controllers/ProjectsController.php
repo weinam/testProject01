@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Project;
 use App\Mail\ProjectCreated;
-
+use App\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 class ProjectsController extends Controller
@@ -17,8 +17,22 @@ class ProjectsController extends Controller
 
     public function index()
     {
-        $projects = auth()->user()->projects->where('is_deleted','=',false);
+        $user = auth()->user();
+        $roles = json_decode($user->role_id);
 
+        $test = DB::table('projects')->get();
+        dd($test);
+        for ($i=0; $i<sizeof($roles); $i++) {
+            $project_id[] = DB::table('roles')->where('id', '=', $roles[$i])
+                                            ->value('project_id');
+        }                          
+
+        for ($j=0; $j<sizeof($project_id); $j++) {
+            $projects = DB::table('projects')->where('id', '=', $project_id[$j])
+                                                ->get();
+        }
+
+        dd($projects);
     	return view('projects.index', compact('projects'));
     }
 
