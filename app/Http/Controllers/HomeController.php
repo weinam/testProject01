@@ -30,20 +30,25 @@ class HomeController extends Controller
                                             ->get();
         $functions = DB::table('functions')->where('is_deleted', '=', false)
                                             ->get()->keyBy('id');
-
-        foreach ($user_roles_id->role_id as $role_id) {
-            foreach ($roles_function as $role_function) {
-                if ($role_id == $role_function->id) {
-                    $functionsArray[] = $role_function->function;
+            
+        if ($user_roles_id != null) {
+            foreach ($user_roles_id->role_id as $role_id) {
+                foreach ($roles_function as $role_function) {
+                    if ($role_id == $role_function->id) {
+                        $functionsArray[] = $role_function->function;
+                    }
                 }
             }
+            for ($i=0; $i<sizeof($functionsArray); $i++) {
+                $temp = json_decode($functionsArray[$i]);
+                for ($j=0; $j<sizeof($temp); $j++) {
+                    $finals[] =  $functions->get($temp[$j]);
+                }
+            }     
         }
-        for ($i=0; $i<sizeof($functionsArray); $i++) {
-            $temp = json_decode($functionsArray[$i]);
-            for ($j=0; $j<sizeof($temp); $j++) {
-                $finals[] =  $functions->get($temp[$j]);
-            }
-        }          
+        else
+            $finals = array();
+                 
         return view('home.index', compact('finals'));
     }
 }

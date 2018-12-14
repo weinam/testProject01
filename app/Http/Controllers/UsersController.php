@@ -23,10 +23,8 @@ class UsersController extends Controller
     {
     	$roles = DB::table('roles')->where('is_deleted', '=', false)
                                     ->get();
-   
-        $user_roles_id = json_decode($user->role_id)->role_id;
-        $isChecked = array();
-        if ($user_roles_id != null) {
+        if ($user->role_id != null) {
+            $user_roles_id = json_decode($user->role_id)->role_id;
             for ($i=0; $i<sizeof($roles); $i++) {
                 for ($j=0; $j<sizeof($user_roles_id); $j++) {
                     if ($roles[$i]->id == $user_roles_id[$j]) {
@@ -38,6 +36,8 @@ class UsersController extends Controller
                 }
             }
         }
+        else
+            $isChecked = array();
     
     	return view('users.edit', compact('user', 'roles', 'isChecked'));
     }
