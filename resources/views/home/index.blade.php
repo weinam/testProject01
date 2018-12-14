@@ -19,12 +19,12 @@
 @section('content')
 	<section class="content">
 		<div class="row">
-			@if ($functions != null)
-				@foreach ($functions as $function) 
+			@if ($finals != null)
+				@foreach ($finals as $final) 
 					<div class="col-lg-4 col-xs-4">
 			          <div class="small-box bg-aqua">
 			            <div class="inner">
-			              <p>{{ $function }}</p>
+			              <p>{{ $final->name }}</p>
 			            </div>
 			            <a href="#" class="small-box-footer">GO <i class="fa fa-arrow-circle-right"></i></a>
 			          </div>

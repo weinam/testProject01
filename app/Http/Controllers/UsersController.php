@@ -24,12 +24,12 @@ class UsersController extends Controller
     	$roles = DB::table('roles')->where('is_deleted', '=', false)
                                     ->get();
    
-        $user_roles = json_decode($user->role_id);
+        $user_roles_id = json_decode($user->role_id)->role_id;
         $isChecked = array();
-        if ($user_roles != null) {
+        if ($user_roles_id != null) {
             for ($i=0; $i<sizeof($roles); $i++) {
-                for ($j=0; $j<sizeof($user_roles); $j++) {
-                    if ($roles[$i]->id == $user_roles[$j]) {
+                for ($j=0; $j<sizeof($user_roles_id); $j++) {
+                    if ($roles[$i]->id == $user_roles_id[$j]) {
                         $isChecked[$i] = true;
                         break;
                     }
@@ -49,11 +49,26 @@ class UsersController extends Controller
             	foreach ($request->except('_token','_method','action') as $key => $value) {
             		$user[$key] = $value;
             	}
-                $user['role_id'] = json_encode($user['role_id']);
+                $roles = DB::table('roles')->where('is_deleted', '=', false)
+                                            ->get();
+
+                for ($i=0; $i<sizeof($user['role_id']); $i++) {
+                    for ($j=0; $j<sizeof($roles); $j++) {
+                        if ($user['role_id'][$i] == $roles[$j]->id) {
+                            $project_id[] = $roles[$j]->project_id;
+                        }
+                    }
+                }
+                $storeArray = [
+                    'role_id' => ($user['role_id']),
+                    'project_id' => ($project_id),
+                ];
+                $user['role_id'] = json_encode($storeArray);
                 if ($request->has('isAdmin')) 
                     $user['isAdmin'] = true;
                 else
                     $user['isAdmin'] = false;
+
             	$user->update();
                 return redirect('/users');
             case 'back':

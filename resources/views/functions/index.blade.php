@@ -40,20 +40,20 @@
 	                </tr>
 	              </thead>
 	              <tbody>
-	              	@foreach ($functions as $function)
+	              	@foreach ($finals as $final)
 	                  <tr>
-	                    <td>{{ $function->name }}</td>
-	                    <td>{{ $function->created_at }}</td>
-	                    <td>{{ $function->updated_at }}</td>
+	                    <td>{{ $final->name }}</td>
+	                    <td>{{ $final->created_at }}</td>
+	                    <td>{{ $final->updated_at }}</td>
 	                    <td>
 	                      <div class="col-xs-4">
-	                        <a href="/functions/{{$function->id}}/show" class="btn btn-default" style="background-color: white; border: none; "><i class="fa fa-book text-blue"></i></a>
+	                        <a href="/functions/{{$final->id}}/show" class="btn btn-default" style="background-color: white; border: none; "><i class="fa fa-book text-blue"></i></a>
 	                      </div>
 	                      <div class="col-xs-4">
-	                        <a href="/functions/{{$function->id}}/edit" class="btn btn-default" style="background-color: white; border: none; "><i class="fa fa-edit text-blue"></i></a>
+	                        <a href="/functions/{{$final->id}}/edit" class="btn btn-default" style="background-color: white; border: none; "><i class="fa fa-edit text-blue"></i></a>
 	                      </div>
 	                      <div class="col-xs-4">
-	                        <form method="POST" action="/functions/{{$function->id}}/delete" id="delete_form">
+	                        <form method="POST" action="/functions/{{$final->id}}/delete" id="delete_form">
 	                          @method('PATCH')
 	                          @csrf
 	                          <button type="summit" class="btn btn-default" style="background-color: white; border: none; "><i class="fa fa-trash text-blue"></i></button>

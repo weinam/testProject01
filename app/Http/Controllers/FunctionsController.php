@@ -11,9 +11,26 @@ class FunctionsController extends Controller
 {
     public function index()
     {
-    	$functions = DB::table('functions')->where('is_deleted', '=', false)
-    										->get();
-    	return view('functions.index', compact('functions'));
+        $user = auth()->user();
+        $projects_id = json_decode($user->role_id)->project_id;
+        if (sizeof($projects_id) <= 1) {
+            $finals = DB::table('functions')->where('is_deleted', '=', false)
+                                                ->where('project_id', '=', $projects_id[0])
+                                                ->get();
+        }
+        else {
+            $functions = DB::table('functions')->where('is_deleted', '=', false)
+                                                ->get();
+            foreach ($projects_id as $project_id) {
+                foreach ($functions as $function) {
+                    if ($project_id == $function->project_id) {
+                        $finals[] = $function;
+                    }
+                }
+            }
+        }
+    	
+    	return view('functions.index', compact('finals'));
     }
 
     public function create()

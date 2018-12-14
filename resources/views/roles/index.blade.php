@@ -40,20 +40,20 @@
                 </tr>
               </thead>
               <tbody>
-              	@foreach ($roles as $role)
+              	@foreach ($finals as $final)
                   <tr>
-                    <td>{{ $role->role_name }}</td>
-                    <td>{{ $role->created_at }}</td>
-                    <td>{{ $role->updated_at }}</td>
+                    <td>{{ $final->role_name }}</td>
+                    <td>{{ $final->created_at }}</td>
+                    <td>{{ $final->updated_at }}</td>
                     <td>
                       <div class="col-xs-4">
-                        <a href="/roles/{{ $role->id }}/show" class="btn btn-default" style="background-color: white; border: none; "><i class="fa fa-book text-blue"></i></a>
+                        <a href="/roles/{{ $final->id }}/show" class="btn btn-default" style="background-color: white; border: none; "><i class="fa fa-book text-blue"></i></a>
                       </div>
                       <div class="col-xs-4">
-                        <a href="/roles/{{ $role->id }}/edit" class="btn btn-default" style="background-color: white; border: none; "><i class="fa fa-edit text-blue"></i></a>
+                        <a href="/roles/{{ $final->id }}/edit" class="btn btn-default" style="background-color: white; border: none; "><i class="fa fa-edit text-blue"></i></a>
                       </div>
                       <div class="col-xs-4">
-                        <form method="POST" action="/roles/{{ $role->id }}/delete" id="delete_form">
+                        <form method="POST" action="/roles/{{ $final->id }}/delete" id="delete_form">
                           @method('PATCH')
                           @csrf
                           <button type="summit" class="btn btn-default" style="background-color: white; border: none; "><i class="fa fa-trash text-blue"></i></button>

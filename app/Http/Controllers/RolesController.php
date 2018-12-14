@@ -10,9 +10,26 @@ class RolesController extends Controller
 {
     public function index()
     {
-    	$roles = DB::table('roles')->where('is_deleted','=',false)
-                                    ->get();
-    	return view('roles.index', compact('roles', 'user'));
+        $user = auth()->user();
+        $user_projects_id = json_decode($user->role_id)->project_id;
+
+        if (sizeof($user_projects_id) <= 1) {
+            $finals = DB::table('roles')->where('is_deleted','=', false)
+                                        ->where('project_id', '=', $user_projects_id[0])
+                                        ->get();
+        }
+        else {
+            $roles = DB::table('roles')->where('is_deleted', '=', false)
+                                        ->get();
+            foreach ($user_projects_id as $user_project_id) {
+                foreach ($roles as $role) {
+                    if ($user_project_id == $role->project_id) {
+                        $finals[] = $role;
+                    }
+                }
+            }
+        }
+    	return view('roles.index', compact('finals', 'user'));
     }
 
     public function create(Request $request)

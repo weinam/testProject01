@@ -25,26 +25,25 @@ class HomeController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $role_id = json_decode($user->role_id);
+        $user_roles_id = json_decode($user->role_id);
+        $roles_function = DB::table('roles')->where('is_deleted', '=', false)
+                                            ->get();
+        $functions = DB::table('functions')->where('is_deleted', '=', false)
+                                            ->get()->keyBy('id');
 
-        if ($role_id != null) {
-            for ($i=0; $i<sizeof($role_id); $i++) {
-                $roles[] = DB::table('roles')->where('id', '=', $role_id[$i])
-                                            ->value('function');
-            }
-            if ($roles != null) {
-                for ($i=0; $i<sizeof($roles); $i++) {
-                    $temp = json_decode($roles[$i]);
-                    for ($j=0; $j<sizeof($temp); $j++) {
-                        $functions[] = DB::table('functions')->where('id', '=', $temp[$j]) 
-                                                                ->value('name');
-                    }
+        foreach ($user_roles_id->role_id as $role_id) {
+            foreach ($roles_function as $role_function) {
+                if ($role_id == $role_function->id) {
+                    $functionsArray[] = $role_function->function;
                 }
             }
         }
-        else
-            $functions = array();
-        
-        return view('home.index', compact('functions'));
+        for ($i=0; $i<sizeof($functionsArray); $i++) {
+            $temp = json_decode($functionsArray[$i]);
+            for ($j=0; $j<sizeof($temp); $j++) {
+                $finals[] =  $functions->get($temp[$j]);
+            }
+        }          
+        return view('home.index', compact('finals'));
     }
 }

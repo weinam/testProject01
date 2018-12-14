@@ -39,18 +39,18 @@
                   </tr>
                 </thead>
                 <tbody>
-                	@foreach ($projects as $project)
+                	@foreach ($finals as $final)
                 		<tr>
-                			<td>{{ $project->title }}</td>
-                			<td>{{ $project->description }}</td>
-                			<td>{{ $project->created_at }}</td>
-                			<td>{{ $project->updated_at }}</td>
+                			<td>{{ $final->title }}</td>
+                			<td>{{ $final->description }}</td>
+                			<td>{{ $final->created_at }}</td>
+                			<td>{{ $final->updated_at }}</td>
                 			<td>
                 				<div class="col-xs-4">
-                					<a href="/projects/{{ $project->id }} "><i class="fa fa-book"></i></a>
+                					<a href="/projects/{{ $final->id }} "><i class="fa fa-book"></i></a>
                 				</div>
                 				<div class="col-xs-4">
-                					<a href="/projects/{{ $project->id }}/edit"><i class="fa fa-edit"></i></a>
+                					<a href="/projects/{{ $final->id }}/edit"><i class="fa fa-edit"></i></a>
                 				</div>
                 				<div class="col-xs-4">
                 					<a 
@@ -58,7 +58,7 @@
                   					document.getElementById('delete_form').submit();">
                 							<i class="fa fa-trash"></i>
             							</a>
-            							<form id="delete_form" action="/projects/{{ $project->id }}/delete" method="POST" style="display: none;">
+            							<form id="delete_form" action="/projects/{{ $final->id }}/delete" method="POST" style="display: none;">
             								@csrf
     							        </form>
                 				</div>

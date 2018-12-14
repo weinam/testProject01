@@ -18,22 +18,17 @@ class ProjectsController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $roles = json_decode($user->role_id);
+        $user_roles_id = json_decode($user->role_id);
 
-        $test = DB::table('projects')->get();
-        dd($test);
-        for ($i=0; $i<sizeof($roles); $i++) {
-            $project_id[] = DB::table('roles')->where('id', '=', $roles[$i])
-                                            ->value('project_id');
-        }                          
-
-        for ($j=0; $j<sizeof($project_id); $j++) {
-            $projects = DB::table('projects')->where('id', '=', $project_id[$j])
-                                                ->get();
+        $projects = DB::table('projects')->where('is_deleted', '=', false)
+                                            ->get();
+        foreach ($user_roles_id->project_id as $pro_id) {
+            foreach ($projects as $project) {
+               if ($pro_id == $project->id)
+                    $finals[] = $project;
+            }
         }
-
-        dd($projects);
-    	return view('projects.index', compact('projects'));
+    	return view('projects.index', compact('finals'));
     }
 
     public function create()
