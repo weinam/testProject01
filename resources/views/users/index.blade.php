@@ -35,17 +35,17 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @for ($i=0; $i<sizeof($users); $i++)
+                  @for ($i=0; $i<sizeof($finals); $i++)
                     <tr>
-                      <td>{{ $users[$i]->name }}</td>
-                      <td>{{ $users[$i]->created_at }}</td>
-                      <td>{{ $users[$i]->updated_at }}</td>
+                      <td>{{ $finals[$i]->name }}</td>
+                      <td>{{ $finals[$i]->created_at }}</td>
+                      <td>{{ $finals[$i]->updated_at }}</td>
                       <td>
                         <div class="col-xs-6">
-                          <a href="/users/{{$users[$i]->id}}/show" class="btn btn-default" style="background-color: white; border: none; "><i class="fa fa-book text-blue"></i></a>
+                          <a href="/users/{{$finals[$i]->id}}/show" class="btn btn-default" style="background-color: white; border: none; "><i class="fa fa-book text-blue"></i></a>
                         </div>
                         <div class="col-xs-6">
-                          <a href="/users/{{$users[$i]->id}}/edit" class="btn btn-default" style="background-color: white; border: none; "><i class="fa fa-edit text-blue"></i></a>
+                          <a href="/users/{{$finals[$i]->id}}/edit" class="btn btn-default" style="background-color: white; border: none; "><i class="fa fa-edit text-blue"></i></a>
                         </div>
                       </td>
                     </tr>

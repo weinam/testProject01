@@ -10,8 +10,20 @@ class UsersController extends Controller
 {
     public function index()
     {
-    	$users = DB::table('users')->get();
-    	return view('users.index',compact('users'));
+        $user = auth()->user();
+        $c_user_proIDs = json_encode(json_decode($user->role_id)->project_id);
+
+        $test = json_decode($user->role_id)->project_id;
+
+        $users = DB::table('users')->get();
+        foreach ($test as $tes) {
+            foreach ($users as $key => $value) {
+                if (json_encode([$tes]) == json_encode(json_decode($value->role_id)->project_id)) {
+                    $finals[] = $value;
+                }
+            }
+        }
+    	return view('users.index',compact('finals'));
     }
 
     public function show(User $user)

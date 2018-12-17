@@ -18,29 +18,43 @@ class ProjectsController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $user_roles_id = json_decode($user->role_id);
+        if ($user->isAdmin == true) {
+            $user_roles_id = json_decode($user->role_id);
 
-        $projects = DB::table('projects')->where('is_deleted', '=', false)
-                                            ->get();
-        foreach ($user_roles_id->project_id as $pro_id) {
-            foreach ($projects as $project) {
-               if ($pro_id == $project->id)
-                    $finals[] = $project;
+            $projects = DB::table('projects')->where('is_deleted', '=', false)
+                                                ->get();
+            foreach ($user_roles_id->project_id as $pro_id) {
+                foreach ($projects as $project) {
+                   if ($pro_id == $project->id)
+                        $finals[] = $project;
+                }
             }
+            return view('projects.index', compact('finals'));
         }
-    	return view('projects.index', compact('finals'));
+        else
+            echo "NAH... NAH... NAH... DON'T TRY TO HACK. BE KIND. PLEASE LEAVE THIS PAGE, YOU VISIT A WRONG WEBSITE.";
     }
 
     public function create()
     {
-    	return view('projects.create');
+        $user = auth()->user();
+        if ($user->isAdmin == true) {
+            return view('projects.create');
+        }
+        else
+            echo "NAH... NAH... NAH... DON'T TRY TO HACK. BE KIND. PLEASE LEAVE THIS PAGE, YOU VISIT A WRONG WEBSITE.";
     }
 
     public function show(Project $project)
     {
-        $this->authorize('update', $project);
+        $user = auth()->user();
+        if ($user->isAdmin == true) {
+            $this->authorize('update', $project);
         
-        return view('projects.show', compact('project'));
+            return view('projects.show', compact('project'));
+        }
+        else
+            echo "NAH... NAH... NAH... DON'T TRY TO HACK. BE KIND. PLEASE LEAVE THIS PAGE, YOU VISIT A WRONG WEBSITE.";
     }
 
     public function store(Request $request)
@@ -61,7 +75,12 @@ class ProjectsController extends Controller
 
     public function edit(Project $project)
     {
-        return view('projects.edit', compact('project'));
+        $user = auth()->user();
+        if ($user->isAdmin == true) {
+            return view('projects.edit', compact('project'));
+        }
+        else
+            echo "NAH... NAH... NAH... DON'T TRY TO HACK. BE KIND. PLEASE LEAVE THIS PAGE, YOU VISIT A WRONG WEBSITE.";
     }
 
     public function update(Request $request, Project $project)

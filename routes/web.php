@@ -18,12 +18,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::resource('/projects', 'ProjectsController');
 // Projects
 Route::get('/projects', 'ProjectsController@index')->name('projects.index');
 Route::get('/projects/create', 'ProjectsController@create')->name('projects.create');
 Route::post('/projects/store', 'ProjectsController@store')->name('projects.store');
-Route::get('/projects/{project}', 'ProjectsController@show')->name('projects.show');
+Route::get('/projects/{project}/show', 'ProjectsController@show')->name('projects.show');
 Route::get('/projects/{project}/edit', 'ProjectsController@edit')->name('projects.edit');
 Route::patch('/projects/{project}/update', 'ProjectsController@update')->name('projects.update');
 Route::post('/projects/{project}/delete', 'ProjectsController@delete')->name('projects.delete');

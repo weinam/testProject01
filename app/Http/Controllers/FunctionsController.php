@@ -12,31 +12,39 @@ class FunctionsController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $projects_id = json_decode($user->role_id)->project_id;
-        if (sizeof($projects_id) <= 1) {
-            $finals = DB::table('functions')->where('is_deleted', '=', false)
-                                                ->where('project_id', '=', $projects_id[0])
-                                                ->get();
-        }
-        else {
-            $functions = DB::table('functions')->where('is_deleted', '=', false)
-                                                ->get();
-            foreach ($projects_id as $project_id) {
-                foreach ($functions as $function) {
-                    if ($project_id == $function->project_id) {
-                        $finals[] = $function;
+        if ($user->isAdmin == true) {
+            $projects_id = json_decode($user->role_id)->project_id;
+            if (sizeof($projects_id) <= 1) {
+                $finals = DB::table('functions')->where('is_deleted', '=', false)
+                                                    ->where('project_id', '=', $projects_id[0])
+                                                    ->get();
+            }
+            else {
+                $functions = DB::table('functions')->where('is_deleted', '=', false)
+                                                    ->get();
+                foreach ($projects_id as $project_id) {
+                    foreach ($functions as $function) {
+                        if ($project_id == $function->project_id) {
+                            $finals[] = $function;
+                        }
                     }
                 }
             }
+            return view('functions.index', compact('finals'));
         }
-    	
-    	return view('functions.index', compact('finals'));
+        else
+            echo "NAH... NAH... NAH... DON'T TRY TO HACK. BE KIND. PLEASE LEAVE THIS PAGE, YOU VISIT A WRONG WEBSITE.";
     }
 
     public function create()
     {
-        $projects = DB::table('projects')->get();
-    	return view('functions.create', compact('projects'));
+        $user = auth()->user();
+        if ($user->isAdmin == true) {
+            $projects = DB::table('projects')->get();
+            return view('functions.create', compact('projects'));
+        }
+        else
+            echo "NAH... NAH... NAH... DON'T TRY TO HACK. BE KIND. PLEASE LEAVE THIS PAGE, YOU VISIT A WRONG WEBSITE.";
     }
 
     public function store(Request $request)
@@ -52,12 +60,22 @@ class FunctionsController extends Controller
 
     public function show(Functions $function)
     {
-    	return view('functions.show', compact('function'));
+        $user = auth()->user();
+        if ($user->isAdmin == true) {
+            return view('functions.show', compact('function'));
+        }
+        else
+            echo "NAH... NAH... NAH... DON'T TRY TO HACK. BE KIND. PLEASE LEAVE THIS PAGE, YOU VISIT A WRONG WEBSITE.";
     }
 
     public function edit(Functions $function)
     {
-    	return view('functions.edit', compact('function'));
+        $user = auth()->user();
+        if ($user->isAdmin == true) {
+            return view('functions.edit', compact('function'));
+        }
+        else
+            echo "NAH... NAH... NAH... DON'T TRY TO HACK. BE KIND. PLEASE LEAVE THIS PAGE, YOU VISIT A WRONG WEBSITE.";
     }
 
     public function update(Request $request, Functions $function)
