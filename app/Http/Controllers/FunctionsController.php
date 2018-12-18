@@ -13,15 +13,9 @@ class FunctionsController extends Controller
     {
         $user = auth()->user();
         if ($user->isAdmin == true) {
-            $projects_id = json_decode($user->role_id)->project_id;
-            if (sizeof($projects_id) <= 1) {
-                $finals = DB::table('functions')->where('is_deleted', '=', false)
-                                                    ->where('project_id', '=', $projects_id[0])
-                                                    ->get();
-            }
-            else {
-                $functions = DB::table('functions')->where('is_deleted', '=', false)
-                                                    ->get();
+            $functions = DB::table('functions')->where('is_deleted', '=', false)->get();
+            $projects_id = json_decode($user->rp_id)->project_id;
+            if ($projects_id[0] != 0) {
                 foreach ($projects_id as $project_id) {
                     foreach ($functions as $function) {
                         if ($project_id == $function->project_id) {
@@ -30,6 +24,8 @@ class FunctionsController extends Controller
                     }
                 }
             }
+            else 
+                $finals = array();
             return view('functions.index', compact('finals'));
         }
         else

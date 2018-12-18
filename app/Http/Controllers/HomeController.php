@@ -25,30 +25,29 @@ class HomeController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $user_roles_id = json_decode($user->role_id);
-        $roles_function = DB::table('roles')->where('is_deleted', '=', false)
-                                            ->get();
-        $functions = DB::table('functions')->where('is_deleted', '=', false)
-                                            ->get()->keyBy('id');
-            
-        if ($user_roles_id != null) {
-            foreach ($user_roles_id->role_id as $role_id) {
-                foreach ($roles_function as $role_function) {
-                    if ($role_id == $role_function->id) {
-                        $functionsArray[] = $role_function->function;
+        if ($user->rp_id != null) {
+            $roles = DB::table('roles')->where('is_deleted', '=', false)->get();
+            $functions = DB::table('functions')->where('is_deleted', '=', false)->get();
+            $roles_id = json_decode($user->rp_id)->role_id;
+            foreach ($roles_id as $role_id) {
+                foreach ($roles as $role) {
+                    if ($role_id == $role->id) {
+                        $functionsArray[] = $role->function;
                     }
                 }
             }
-            for ($i=0; $i<sizeof($functionsArray); $i++) {
-                $temp = json_decode($functionsArray[$i]);
-                for ($j=0; $j<sizeof($temp); $j++) {
-                    $finals[] =  $functions->get($temp[$j]);
+            foreach ($functionsArray as $functionArray) {
+                $temps = json_decode($functionArray);
+                foreach ($temps as $temp) {
+                    $finals[] = $functions->get($temp);
                 }
-            }     
+            }    
         }
-        else
+        else {
+            DB::table('users')->where('id', '=', $user->id)
+                                ->update(['rp_id' => '{"role_id":["0"],"project_id":[0]}']);
             $finals = array();
-                 
+        }
         return view('home.index', compact('finals'));
     }
 }

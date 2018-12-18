@@ -47,7 +47,7 @@
                 			<td>{{ $final->updated_at }}</td>
                 			<td>
                 				<div class="col-xs-4">
-                					<a href="/projects/{{ $final->id }} "><i class="fa fa-book"></i></a>
+                					<a href="/projects/{{ $final->id }}/show "><i class="fa fa-book"></i></a>
                 				</div>
                 				<div class="col-xs-4">
                 					<a href="/projects/{{ $final->id }}/edit"><i class="fa fa-edit"></i></a>

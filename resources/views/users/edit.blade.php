@@ -40,9 +40,9 @@
               	<div class="container">
               		@for ($i=0; $i<sizeof($roles); $i++)
               			@if (sizeof($isChecked) != 0)
-              				<input type="checkbox" name="role_id[]" value={{$roles[$i]->id}} {{$isChecked[$i] ? "checked":""}}> {{ $roles[$i]->role_name }}<br>
+              				<input type="checkbox" name="rp_id[]" value={{$roles[$i]->id}} {{$isChecked[$i] ? "checked":""}}> {{ $roles[$i]->role_name }}<br>
               			@else
-              				<input type="checkbox" name="role_id[]" value={{$roles[$i]->id}}> {{ $roles[$i]->role_name }}<br>
+              				<input type="checkbox" name="rp_id[]" value={{$roles[$i]->id}}> {{ $roles[$i]->role_name }}<br>
               			@endif
                 	@endfor
                 </div>
