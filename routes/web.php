@@ -25,7 +25,7 @@ Route::post('/projects/store', 'ProjectsController@store')->name('projects.store
 Route::get('/projects/{project}/show', 'ProjectsController@show')->name('projects.show');
 Route::get('/projects/{project}/edit', 'ProjectsController@edit')->name('projects.edit');
 Route::patch('/projects/{project}/update', 'ProjectsController@update')->name('projects.update');
-Route::post('/projects/{project}/delete', 'ProjectsController@delete')->name('projects.delete');
+Route::patch('/projects/{project}/delete', 'ProjectsController@delete')->name('projects.delete');
 
 //User
 Route::get('/users', 'UsersController@index')->name('users.index');

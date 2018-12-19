@@ -47,21 +47,18 @@
                 			<td>{{ $final->updated_at }}</td>
                 			<td>
                 				<div class="col-xs-4">
-                					<a href="/projects/{{ $final->id }}/show "><i class="fa fa-book"></i></a>
-                				</div>
-                				<div class="col-xs-4">
-                					<a href="/projects/{{ $final->id }}/edit"><i class="fa fa-edit"></i></a>
-                				</div>
-                				<div class="col-xs-4">
-                					<a 
-                  					onclick="event.preventDefault();
-                  					document.getElementById('delete_form').submit();">
-                							<i class="fa fa-trash"></i>
-            							</a>
-            							<form id="delete_form" action="/projects/{{ $final->id }}/delete" method="POST" style="display: none;">
-            								@csrf
-    							        </form>
-                				</div>
+                                    <a href="/projects/{{$final->id}}/show" class="btn btn-default" style="background-color: white; border: none; "><i class="fa fa-book text-blue"></i></a>
+                                </div>
+                                <div class="col-xs-4">
+                                    <a href="/projects/{{$final->id}}/edit" class="btn btn-default" style="background-color: white; border: none; "><i class="fa fa-edit text-blue"></i></a>
+                                </div>
+                                <div class="col-xs-4">
+                                    <form method="POST" action="/projects/{{$final->id}}/delete" id="delete_form">
+                                      @method('PATCH')
+                                      @csrf
+                                      <button type="summit" class="btn btn-default" style="background-color: white; border: none; "><i class="fa fa-trash text-blue"></i></button>
+                                    </form>
+                                </div>
                 			</td>
                 		</tr>
                 	@endforeach

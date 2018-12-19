@@ -11,22 +11,13 @@ class UsersController extends Controller
     public function index()
     {
         $user = auth()->user();
-        if ($user->role_id != null) {
-            $project_ids = json_decode($user->role_id)->project_id;
-
+        if ($user->isAdmin == true) {
             $users = DB::table('users')->get();
-            foreach ($project_ids as $project_id) {
-                foreach ($users as $key => $value) {
-                    if (json_encode([$project_id]) == json_encode(json_decode($value->role_id)->project_id)) {
-                        $finals[] = $value;
-                    }
-                }
-            }
+            $finals = $users;
         }
-        else {
-            $finals = DB::table('users')->get();
-        }
-            
+        else 
+            echo "NAH... NAH... NAH... DON'T TRY TO HACK. BE KIND. PLEASE LEAVE THIS PAGE, YOU VISIT A WRONG WEBSITE.";
+        
     	return view('users.index',compact('finals'));
     }
 
@@ -38,11 +29,11 @@ class UsersController extends Controller
     public function edit(User $user)
     {
     	$roles = DB::table('roles')->where('is_deleted', '=', false)->get();
-        if ($user->rp_id != null) {
-            $user_roles_id = json_decode($user->rp_id)->role_id;
+        $roles_id = json_decode($user->rp_id)->role_id;
+        if ($roles_id[0] != 0) {
             for ($i=0; $i<sizeof($roles); $i++) {
-                for ($j=0; $j<sizeof($user_roles_id); $j++) {
-                    if ($roles[$i]->id == $user_roles_id[$j]) {
+                for ($j=0; $j<sizeof($roles_id); $j++) {
+                    if ($roles[$i]->id == $roles_id[$j]) {
                         $isChecked[$i] = true;
                         break;
                     }
@@ -51,9 +42,9 @@ class UsersController extends Controller
                 }
             }
         }
-        else
+        else {
             $isChecked = array();
-        
+        }
     	return view('users.edit', compact('user', 'roles', 'isChecked'));
     }
 

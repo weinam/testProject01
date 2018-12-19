@@ -101,7 +101,6 @@ class ProjectsController extends Controller
     public function delete(Project $project)
     {
         $this->authorize('update', $project);
-
         $project['is_deleted'] = true;
         $project->save();
 
