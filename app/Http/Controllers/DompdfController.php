@@ -12,10 +12,8 @@ class DompdfController extends Controller
     public function index()
     {
     	$dompdf = new Dompdf();
-    	$html = asset('mallletter/sample_letter.html');
-    	$test = file_get_contents($html);
-    	dd($test);
-    	$dompdf->loadHtml('<h1>Ready</h1>');
+    	$html = file_get_contents('./mallletter/sample_letter.html');
+    	$dompdf->loadHtml($html);
     	$dompdf->setPaper('A4', 'potrait');
     	$dompdf->render();
     	$dompdf->stream('letter', array('Attachment'=>0));
