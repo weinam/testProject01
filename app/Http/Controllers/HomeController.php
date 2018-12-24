@@ -28,26 +28,32 @@ class HomeController extends Controller
         if ($user->rp_id != null) {
             $roles = DB::table('roles')->where('is_deleted', '=', false)->get();
             $functions = DB::table('functions')->where('is_deleted', '=', false)->get()->keyBy('id');
-            $roles_id = json_decode($user->rp_id)->role_id;;
-            if ($roles_id[0] != 0) {
-                foreach ($roles_id as $role_id) {
-                    foreach ($roles as $role) {;
-                        if ($role_id == $role->id) {
-                            $functionsArray[] = $role->function;
+            if (sizeof($roles) != 0 && sizeof($functions) != 0) {
+                $roles_id = json_decode($user->rp_id)->role_id;;
+                if ($roles_id[0] != 0) {
+                    foreach ($roles_id as $role_id) {
+                        foreach ($roles as $role) {;
+                            if ($role_id == $role->id) {
+                                $functionsArray[] = $role->function;
+                            }
+                        }
+                    }
+                    foreach ($functionsArray as $functionArray) {
+                        $temps = json_decode($functionArray);
+                        foreach ($temps as $temp) {
+                            if ($functions->get($temp) != null)
+                                $finals[] = $functions->get($temp);
+                            else
+                                $finals = array();
                         }
                     }
                 }
-                foreach ($functionsArray as $functionArray) {
-                    $temps = json_decode($functionArray);
-                    foreach ($temps as $temp) {
-                        if ($functions->get($temp) != null)
-                            $finals[] = $functions->get($temp);
-                    }
+                else {
+                    $finals = array();
                 }
             }
-            else {
-                $finals = array();
-            } 
+            else
+                $finals = array(); 
         }
         else {
             DB::table('users')->where('id', '=', $user->id)

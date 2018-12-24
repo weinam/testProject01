@@ -54,6 +54,9 @@ Route::patch('/functions/{function}/delete', 'FunctionsController@delete')->name
 //Profile
 Route::get('/profile/{profile}/show', 'ProfileController@show')->name('profile.show');
 
+//Dompdf
+Route::get('/dompdf', 'DompdfController@index')->name('dompdf.index');
+
 Route::post('/projects/{project}/tasks', 'ProjectTasksController@store');
 Route::patch('/tasks/{task}', 'ProjectTasksController@update');
 Route::get('/groups', 'GroupsController@index');
