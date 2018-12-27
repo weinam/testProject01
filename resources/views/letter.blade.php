@@ -25,9 +25,9 @@ Dear Sir/Madam,
 <br>
 <b>- Non-Compliances - Business Hours on 25 November 2018</b>
 <hr>
-This letter is a reminder for Non-Compliances - Business Hours.
+{{$array['content']}}
 <br><br>
-<b style="color:red">This is a sample template. Please edit according to your requirement.</b>
+<b style="color:red">{{$array['content_red']}}</b>
 <br><br>
 Sincerely,
 <br>
