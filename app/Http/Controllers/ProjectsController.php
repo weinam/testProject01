@@ -20,18 +20,23 @@ class ProjectsController extends Controller
         $user = auth()->user();
         if ($user->isAdmin == true) {
             $projects = DB::table('projects')->where('is_deleted', '=', false)->get();
-            $projects_id = json_decode($user->rp_id)->project_id;
-            if ($projects_id[0] != 0) {
-                foreach ($projects_id as $project_id) {
-                    foreach ($projects as $project) {
-                        if ($project_id == $project->id) {
-                            $finals[] = $project;
+            if (sizeof($projects) != 0) {
+                $projects_id = json_decode($user->rp_id)->project_id;
+                if ($projects_id[0] != 0) {
+                    foreach ($projects_id as $project_id) {
+                        foreach ($projects as $project) {
+                            if ($project_id == $project->id) {
+                                $finals[] = $project;
+                            }
                         }
                     }
                 }
+                else 
+                    $finals = array();
             }
-            else 
+            else
                 $finals = array();
+                
             return view('projects.index', compact('finals'));
         }
         else

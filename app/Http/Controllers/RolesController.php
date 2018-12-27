@@ -19,18 +19,23 @@ class RolesController extends Controller
 
         if ($user->isAdmin == true) {
             $roles = DB::table('roles')->where('is_deleted', '=', false)->get();
-            $projects_id = json_decode($user->rp_id)->project_id;
-            if ($projects_id[0] != 0) {
-                foreach ($projects_id as $project_id) {
-                    foreach ($roles as $role) {
-                        if ($project_id == $role->project_id) {
-                            $finals[] = $role;
+            if (sizeof($roles) != 0) {
+                $projects_id = json_decode($user->rp_id)->project_id;
+                if ($projects_id[0] != 0) {
+                    foreach ($projects_id as $project_id) {
+                        foreach ($roles as $role) {
+                            if ($project_id == $role->project_id) {
+                                $finals[] = $role;
+                            }
                         }
                     }
                 }
+                else
+                    $finals = array();
             }
             else
                 $finals = array();
+                
             return view('roles.index', compact('finals', 'user'));
         }
         else 

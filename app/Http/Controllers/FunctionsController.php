@@ -14,18 +14,23 @@ class FunctionsController extends Controller
         $user = auth()->user();
         if ($user->isAdmin == true) {
             $functions = DB::table('functions')->where('is_deleted', '=', false)->get();
-            $projects_id = json_decode($user->rp_id)->project_id;
-            if ($projects_id[0] != 0) {
-                foreach ($projects_id as $project_id) {
-                    foreach ($functions as $function) {
-                        if ($project_id == $function->project_id) {
-                            $finals[] = $function;
+            if (sizeof($functions) != 0) {
+                $projects_id = json_decode($user->rp_id)->project_id;
+                if ($projects_id[0] != 0) {
+                    foreach ($projects_id as $project_id) {
+                        foreach ($functions as $function) {
+                            if ($project_id == $function->project_id) {
+                                $finals[] = $function;
+                            }
                         }
                     }
                 }
+                else 
+                    $finals = array();
             }
-            else 
+            else
                 $finals = array();
+                
             return view('functions.index', compact('finals'));
         }
         else
